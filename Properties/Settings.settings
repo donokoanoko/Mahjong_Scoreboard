@@ -1,0 +1,54 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Mahjong_Scoreboard.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="uri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:12345/</Value>
+    </Setting>
+    <Setting Name="score_txt_pass" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="yonma" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="crown" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="player_a_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PlayerA</Value>
+    </Setting>
+    <Setting Name="player_a_location" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="player_b_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PlayerB</Value>
+    </Setting>
+    <Setting Name="player_b_location" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="player_c_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PlayerC</Value>
+    </Setting>
+    <Setting Name="player_d_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PlayerD</Value>
+    </Setting>
+    <Setting Name="player_d_color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">MediumAquamarine</Value>
+    </Setting>
+    <Setting Name="player_a_color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">LightCoral</Value>
+    </Setting>
+    <Setting Name="player_b_color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Khaki</Value>
+    </Setting>
+    <Setting Name="player_c_color" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">LightBlue</Value>
+    </Setting>
+    <Setting Name="player_c_location" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="player_d_location" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

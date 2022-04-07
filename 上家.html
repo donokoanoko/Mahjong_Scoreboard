@@ -1,0 +1,123 @@
+﻿<html>
+<head>
+    <script type="text/javascript">
+        //Set server URI
+        var uri = "ws://localhost:12345"
+
+        var ws = null;
+
+        //connect
+        function open() {
+            if (ws === null) {
+                ws = new WebSocket(uri);
+                ws.onopen = (msg) => {
+                    console.log("Connect..")
+                    document.getElementById("container").classList.add("fade_right")
+                };
+                ws.onmessage = (msg) => {
+                    if (msg && msg.data) {
+                        var message = JSON.parse(msg.data);
+                        if (typeof message.kamitya !== 'undefined') {
+                            document.getElementById("player").innerHTML = message.kamitya.name;
+                            document.getElementById("player").style.backgroundColor = message.kamitya.color
+                            switch (Number(message.status)) {
+                                case 1:
+                                    document.getElementById("container").classList.remove("fade_left")
+                                    document.getElementById("container").classList.add("fade_right")
+                                    break;
+                                case 2:
+                                    document.getElementById("container").classList.remove("fade_right")
+                                    document.getElementById("container").classList.add("fade_left")
+                                    break;
+                            }
+                        }
+                        else {
+                            document.getElementById("container").classList.remove("fade_left")
+                            document.getElementById("container").classList.add("fade_right")
+                        }
+
+                    }
+                };
+                ws.onclose = (msg) => {
+                    console.log("disconnect(" + msg.code + ")");
+                    webSocket = null;
+                    location.reload();
+                };
+
+                ws.onerror = (msg) => {
+                    console.log("Error " + msg);
+                };
+            }
+        }
+        open();
+    </script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+
+        #container {
+            margin: 0px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px 10px;
+        }
+
+        #player {
+            width: 60px;
+            height: 500px;
+            background: #ffb7b7;
+            clip-path: polygon( 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 40px;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+        }
+
+        .fade_right {
+            animation-name: fade_right_motion;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            opacity: 0;
+        }
+
+        @keyframes fade_right_motion {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(100px);
+            }
+        }
+
+        .fade_left {
+            animation-name: fade_left_motion;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            opacity: 0;
+        }
+
+        @keyframes fade_left_motion {
+            from {
+                opacity: 1;
+                transform: translateX(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="player">接続待機中</div>
+    </div>
+</body>
+</html>
+

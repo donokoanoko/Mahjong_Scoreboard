@@ -1,0 +1,130 @@
+﻿<html>
+<head>
+    <script type="text/javascript">
+        //Set server URI
+        var uri = "ws://localhost:12345"
+
+        var ws = null;
+
+        //connect
+        function open() {
+            if (ws === null) {
+                ws = new WebSocket(uri);
+                ws.onopen = (msg) => {
+                    console.log("Connect..")
+                    document.getElementById("container").classList.add("fade_down")
+                };
+                ws.onmessage = (msg) => {
+                    if (msg && msg.data) {
+                        var message = JSON.parse(msg.data);
+                        console.log(message);
+                        if (typeof message.toimen !== 'undefined') {
+                            console.log("if");
+                            document.getElementById("player").innerHTML = message.toimen.name;
+                            document.getElementById("player").style.backgroundColor = message.toimen.color
+                            switch (Number(message.status)) {
+                                case 1:
+                                    document.getElementById("container").classList.remove("fade_up")
+                                    document.getElementById("container").classList.add("fade_down")
+                                    break;
+                                case 2:
+                                    document.getElementById("container").classList.remove("fade_down")
+                                    document.getElementById("container").classList.add("fade_up")
+                                    break;
+                            }
+                        }
+                        else {
+                            document.getElementById("container").classList.remove("fade_up")
+                            document.getElementById("container").classList.add("fade_down")
+                        }
+                    }
+                };
+                ws.onclose = (msg) => {
+                    console.log("disconnect(" + msg.code + ")");
+                    webSocket = null;
+                    location.reload();
+                };
+
+                ws.onerror = (msg) => {
+                    console.log("Error " + msg);
+                };
+            }
+        }
+        open();
+    </script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+
+        #container {
+            margin: 0px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px 10px;
+            width: 500px;
+            height: 60px;
+            background: #ffb7b7;
+            clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 100%);
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 40px;
+        }
+
+        #player {
+            width: 500px;
+            height: 60px;
+            background: #ffb7b7;
+            clip-path: polygon(0% 100%, 0% 0%, 100% 0%, 100% 100%);
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 40px;
+            animation-duration: 1.5s;
+        }
+
+        .fade_up {
+            animation-name: fade_up_motion;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            opacity: 0;
+        }
+
+        @keyframes fade_up_motion {
+            from {
+                opacity: 1;
+                transform: translateY(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade_down {
+            animation-name: fade_down_motion;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            opacity: 0;
+        }
+
+        @keyframes fade_down_motion {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(100px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="player">接続待機中</div>
+    </div>
+</body>
+</html>
+
